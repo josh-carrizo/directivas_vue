@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>VUE</title>
+</head>
+    <style>
+        .jumbotron{
+            background: url(https://giffiles.alphacoders.com/208/208893.gif ) repeat  center;
+            background-size: 100% ;
+            height: 45rem;
+        }
+
+        .titulo{
+            font-weight: bold;
+            padding: 20px;
+            color:white;
+        }
+
+        .titulo_cuadro, .texto_consulta{
+            font-weight: bold;
+
+        }
+        .card{
+            background-color: white;
+            opacity: .75;
+        }
+    </style>
+<body>
+    <div class="jumbotron container" id="app">
+        <h3 class="titulo">La lista de {{name}}</h1>
+            <div class="row">
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                        <h4 class="titulo_cuadro card-title">Actividades realizadas por {{name}}</h4>
+                        <ul>
+                            <li class="texto_consulta" v-for ="(actividad, posicion) in actividades" v-bind:key="posicion">{{posicion+1}}. {{actividad}}</li>
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                        <h4 class="titulo_cuadro" v-if="cuarentena == true">Actividades que {{name}} hará post-cuarentena</h4>
+                        <h4 class="titulo_cuadro" v-else>Actividades que {{name}} hará ahora</h4>
+                        <ul>
+                            <li class="texto_consulta" v-for ="(pendientes, posicion) in por_hacer"  v-if="posicion %2==0" v-bind:key="posicion">{{posicion+1}}. {{pendientes}}</li>
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+    let app = new Vue({
+        el: "#app",
+        data: {
+            name: "Josh!",
+            cuarentena: true,
+
+            actividades: [
+                "Terminar la U",
+                "Viajar",
+                "Grabar música",
+                "Crear contenido",
+                "Emprender"
+            ],
+            por_hacer: [
+                "Acampar",
+                "Más viajes",
+                "Construir una app para jugar",
+                "Salir a comer chatarra"
+            ]
+        }
+    })
+    </script>
+</body>
+</html>
